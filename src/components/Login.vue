@@ -32,7 +32,7 @@ export default {
         .then(result => {
           this.$router.replace('/home')
         })
-        .then(err => {
+        .catch(err => {
           this.error = err
         })
     }
