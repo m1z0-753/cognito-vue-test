@@ -122,4 +122,32 @@ export default class Cognito {
       })
     })
   }
+
+  /**
+   * 確認コードからユーザーを有効化し、同時にログインまで行う。
+   */
+  confirmationAndLogin (username, confirmationCode, password) {
+    const userData = { Username: username, Pool: this.userPool }
+    const cognitoUser = new CognitoUser(userData)
+    const authenticationData = { Username: username, Password: password }
+    const authenticationDetails = new AuthenticationDetails(authenticationData)
+
+    return new Promise((resolve, reject) => {
+      cognitoUser.confirmRegistration(confirmationCode, true, (err, result) => {
+        if (err) {
+          console.log(err)
+        } else {
+          cognitoUser.authenticateUser(authenticationDetails, {
+            onSuccess: (result) => {
+              // 実際にはクレデンシャルなどをここで取得する(今回は省略)
+              resolve(result)
+            },
+            onFailure: (err) => {
+              reject(err)
+            }
+          })
+        }
+      })
+    })
+  }
 }

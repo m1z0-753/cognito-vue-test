@@ -4,12 +4,7 @@
     <h2>Essential Links</h2>
     <ul>
       <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
+       <button v-on:click='logout()'>Logout</button>
       </li>
       <li>
         <a
@@ -101,6 +96,10 @@ export default {
       })
   },
   methods: {
+    logout () {
+      this.$cognito.logout()
+      this.$router.replace('/login')
+    }
 
   }
 }
