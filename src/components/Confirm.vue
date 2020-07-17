@@ -42,7 +42,7 @@ export default {
           this.$router.replace('/login')
         })
         .catch(err => {
-          this.error = err
+          console.log(err)
         })
     },
     confirmAndLogin () {
@@ -52,7 +52,7 @@ export default {
           this.$router.replace('/home')
         })
         .catch(err => {
-          this.error = err
+          console.log(err)
         })
     },
     resendConfirmationByEmail () {

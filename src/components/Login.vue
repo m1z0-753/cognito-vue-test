@@ -36,7 +36,7 @@ export default {
           this.$router.replace('/home')
         })
         .catch(err => {
-          this.error = err
+          console.log(err)
         })
     },
     resetPassword () {
@@ -45,7 +45,7 @@ export default {
           console.log(result)
         })
         .catch(err => {
-          this.error = err
+          console.log(err)
         })
     }
 
