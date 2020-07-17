@@ -35,7 +35,7 @@ export default {
     singup () {
       if (this.username && (this.password === this.passwordConfirm)) {
         this.$cognito.signUp(this.username, this.password)
-          .then(resutl => {
+          .then(result => {
             // 登録に成功したら、確認コードの入力画面を表示
             this.$router.replace('/confirm')
           })

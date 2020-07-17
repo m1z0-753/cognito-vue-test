@@ -41,7 +41,7 @@ export default {
           console.log(result)
           this.$router.replace('/login')
         })
-        .then(err => {
+        .catch(err => {
           this.error = err
         })
     },
@@ -51,7 +51,7 @@ export default {
           console.log(result)
           this.$router.replace('/home')
         })
-        .then(err => {
+        .catch(err => {
           this.error = err
         })
     },
