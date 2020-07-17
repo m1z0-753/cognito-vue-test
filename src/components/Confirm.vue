@@ -16,6 +16,9 @@
       </div>
       <button>確認</button>
     </form>
+    <div>
+      <button @click='resendConfirmationByEmail()'>確認コード再送</button>
+    </div>
     <router-link to="/login">ログイン</router-link>
     <router-link to="/singup">ユーザー登録</router-link>
   </div>
@@ -51,6 +54,9 @@ export default {
         .then(err => {
           this.error = err
         })
+    },
+    resendConfirmationByEmail () {
+      this.$cognito.resendConfirmationByEmail(this.username)
     }
   }
 }

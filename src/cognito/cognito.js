@@ -150,4 +150,51 @@ export default class Cognito {
       })
     })
   }
+
+  /**
+   * 認証コード再送
+   */
+  resendConfirmationByEmail (username) {
+    return new Promise((resolve, reject) => {
+      const userData = { Username: username, Pool: this.userPool }
+      const cognitoUser = new CognitoUser(userData)
+      cognitoUser.resendConfirmationCode(function (err, result) {
+        if (err) reject(err)
+        else resolve(result)
+      })
+    })
+  }
+
+  /**
+   * パスワードリセット
+   */
+  resetPassword (username) {
+    return new Promise((resolve, reject) => {
+      const userData = { Username: username, Pool: this.userPool }
+      const cognitoUser = new CognitoUser(userData)
+      cognitoUser.forgotPassword({
+        onSuccess: (data) => {
+          console.log(data)
+        },
+        onFailure: (err) => {
+          console.log(err)
+        },
+        inputVerificationCode: (data) => {
+          console.log('Code sent to:' + data)
+          var verificationCode = prompt('確認コードを入力', '')
+          var newPassword = prompt('新たなパスワードを入力', '')
+          cognitoUser.confirmPassword(verificationCode, newPassword, {
+            onSuccess: (res) => {
+              console.log('Password confirmed!')
+              resolve(res)
+            },
+            onFailure: (err) => {
+              console.log('Password not confirmed!', err)
+              reject(err)
+            }
+          })
+        }
+      })
+    })
+  }
 }

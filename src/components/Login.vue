@@ -12,6 +12,9 @@
       </div>
       <button>ログイン</button>
     </form>
+    <div>
+      <button @click="resetPassword()">パスワードを忘れた方へ</button>
+    </div>
     <router-link to="/confirm">確認コード入力</router-link>
     <router-link to="/singup">ユーザー登録</router-link>
   </div>
@@ -35,7 +38,17 @@ export default {
         .then(err => {
           this.error = err
         })
+    },
+    resetPassword () {
+      this.$cognito.resetPassword(this.username)
+        .then(result => {
+          console.log(result)
+        })
+        .catch(err => {
+          this.error = err
+        })
     }
+
   }
 }
 </script>
